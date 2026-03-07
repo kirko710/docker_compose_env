@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reyhan Hadyan Nabil</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fff;
+      color: #111;
+    }
+
+    nav {
+      border-bottom: 1px solid #e5e5e5;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav .logo {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    nav .logo span {
+      color: #111;
+    }
+
+    nav .dot {
+      color: #e63946;
+    }
+
+    .hero {
+      padding: 80px 40px 40px;
+      max-width: 720px;
+    }
+
+    .hero .label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      color: #111;
+    }
+
+    .hero p {
+      margin-top: 16px;
+      font-size: 1rem;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .divider {
+      height: 1px;
+      background: #e5e5e5;
+      margin: 40px 40px;
+    }
+
+    .posts {
+      max-width: 720px;
+      padding: 0 40px 80px;
+    }
+
+    .post-item {
+      display: flex;
+      align-items: baseline;
+      gap: 20px;
+      padding: 20px 0;
+      border-bottom: 1px solid #f0f0f0;
+      cursor: default;
+      transition: padding-left 0.2s;
+    }
+
+    .post-item:hover {
+      padding-left: 8px;
+    }
+
+    .post-num {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #bbb;
+      min-width: 24px;
+    }
+
+    .post-title {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: #111;
+    }
+
+    .post-tag {
+      margin-left: auto;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #999;
+    }
+
+    .status {
+      padding: 0 40px;
+      font-size: 0.8rem;
+      color: #bbb;
+      margin-bottom: 8px;
+    }
+
+    footer {
+      border-top: 1px solid #e5e5e5;
+      padding: 24px 40px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: #bbb;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo"><span>Reyhan Hadyan Nabil</span><span class="dot">.</span></div>
+    <div style="font-size:0.8rem; color:#999;">Fakultas Ilmu Komputer Universitas Brawijaya</div>
+  </nav>
+
+  <div class="hero">
+    <div class="label">Writing</div>
+    <h1>All Posts</h1>
+    <p>Teknik Informatika 2024</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="status" id="status">Memuat...</div>
+  <div class="posts" id="posts"></div>
+
+  <footer>
+    <span>Reyhan Hadyan Nabil — 2026</span>
+    <span>Tutor</span>
+  </footer>
+
+  <script>
+    fetch('http://127.0.0.1:8081')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('status').textContent = data.length + ' tulisan';
+        const container = document.getElementById('posts');
+        data.forEach((post, i) => {
+          container.innerHTML += `
+            <div class="post-item">
+              <span class="post-num">${String(i + 1).padStart(2, '0')}</span>
+              <span class="post-title">${post}</span>
+              <span class="post-tag">Read</span>
+            </div>`;
+        });
+      })
+      .catch(() => {
+        document.getElementById('status').textContent = 'Gagal memuat data.';
+      });
+  </script>
+
+</body>
+</html>
