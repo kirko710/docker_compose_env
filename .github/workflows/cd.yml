@@ -1,9 +1,13 @@
 name: CD Pipeline
-#CD: Build, Test, Release, Deploy on push to main
+# CD: Build, Test, Release, Deploy on push to main
+
 on:
   push:
     branches:
       - main
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -39,6 +43,8 @@ jobs:
     needs: test
     steps:
       - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Create Release Tag
         run: |
           git config user.name "github-actions"
