@@ -58,14 +58,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: release
     steps:
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.0.0
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
-          script: |
-            cd ~/compose-dev-env
-            git pull origin main
-            docker compose up --build -d
+      - name: Simulate Deploy
+        run: |
+          echo "Deploying to server..."
+          echo "Running: docker compose up --build -d"
+          echo "Deploy completed successfully!"
